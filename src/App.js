@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import Wrapper from "./components/wrapper/wrapper.component";
 import Header from "./components/header.component";
 import Buttons from "./components/buttons/buttons.component";
+import Settings from "./components/setting/settings.component";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -17,7 +18,6 @@ const GlobalStyle = createGlobalStyle`
 			? "Space Mono"
 			: "Space Mono"};
     color: #D7E0FF;
-
     .active {
       background-color: ${({ color }) =>
 			color === "salmon"
@@ -37,12 +37,17 @@ function App() {
 	const [option, setOption] = useState("pomodoro");
 	const [font, setFont] = useState("");
 	const [color, setColor] = useState("");
+  const [settingsVisible, setSettingsVisible] = useState('false')
 
 	const pomodoroOptions = ["pomodoro", "short break", "long break"];
 
 	const handleOption = (option) => {
 		setOption(option);
 	};
+
+  const toggleSettings = () => {
+    setSettingsVisible(!settingsVisible)
+  }
 
 	return (
 		<Wrapper>
@@ -53,6 +58,7 @@ function App() {
 				pomodoroOptions={pomodoroOptions}
 				handleOption={handleOption}
 			/>
+			<Settings toggleSettings={toggleSettings} />
 		</Wrapper>
 	);
 }

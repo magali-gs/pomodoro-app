@@ -11,4 +11,7 @@ export const ButtonSytled = styled.button`
 	background-color: transparent;
 	color: #d7e0ff;
 	opacity: 0.4;
+	&:hover {
+		opacity: 1;
+	}
 `;

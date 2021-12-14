@@ -4,9 +4,9 @@ const WrapperContainer = styled.div`
 	margin-top: 3rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: space-around;
 	align-items: center;
-	min-height: 100vh;
+	min-height: 90vh;
 `;
 
 const Wrapper = ({ children }) => (

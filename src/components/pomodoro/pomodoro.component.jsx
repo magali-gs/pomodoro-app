@@ -13,7 +13,7 @@ const Pomodoro = ({ timer }) => {
 			<PomodoroInnerContainer>
 				<ProgressBarOuter>
 					<ProgressBarInner>
-						<TimerContainer>{timer}</TimerContainer>
+						<TimerContainer>{timer}:00</TimerContainer>
 						<ActionContainer>PAUSE</ActionContainer>
 					</ProgressBarInner>
 				</ProgressBarOuter>

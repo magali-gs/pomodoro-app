@@ -7,9 +7,10 @@ const ButtonsContainer = styled.div`
 	background: #161932;
 	padding: 8px;
 	border-radius: 31.5px;
+	z-index: 1;
 `;
 
-const Buttons = ({ pomodoroOptions, handleOption, pomodoroOption }) => {
+const Buttons = ({ pomodoroOptions, handleOption, pomodoroOption,  }) => {
 	return (
 		<ButtonsContainer>
 			{pomodoroOptions.map((option, idx) => (

@@ -7,17 +7,18 @@ export const SettingsForm = styled.div`
 	width: 33.75rem;
 	background-color: #ffffff;
 	border-radius: 25px;
+	z-index: 2;
 	button {
 		align-self: center;
 		bottom: -1.5rem;
 		position: relative;
-        opacity: 1;
-        color: #fff;
-        transition: .2s all ease;
-        &:hover {
-            opacity: 0.8;
-            transition: .2s all ease;
-        }
+		opacity: 1;
+		color: #fff;
+		transition: 0.2s all ease;
+		&:hover {
+			opacity: 0.8;
+			transition: 0.2s all ease;
+		}
 	}
 `;
 
@@ -110,7 +111,7 @@ export const SettingsContainer = styled.div`
 	.time {
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 24px;
+		gap: 22px;
 		.time-imputs {
 			width: 100%;
 			display: flex;
@@ -125,6 +126,7 @@ export const SettingsContainer = styled.div`
 				font-weight: bold;
 				padding: 15px;
 				font-size: 0.875rem;
+                color: #1e213f;
 			}
 			label {
                 font-size: 0.75rem;

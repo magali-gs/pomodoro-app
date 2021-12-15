@@ -37,22 +37,23 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 	const [option, setOption] = useState("pomodoro");
-	const [pomodoroTime, setPomodoroTime] = useState(25)
-	const [shortBreakTime, setShortBreakTime] = useState(5);
-	const [longBreakTime, setLongBreakTime] = useState(15);
+	const [pomodoroOptions, setPomodoroOptions] = useState({
+		pomodoro: 25,
+		"long break": 15,
+		"short break": 5,
+	});
 	const [themeFont, setThemeFont] = useState("Kumbh Sans");
 	const [themeColor, setThemeColor] = useState("#F87070");
 
 	const [settingsVisible, setSettingsVisible] = useState(false);
 
-	const pomodoroOptions = ["pomodoro", "short break", "long break"];
-
 	const handleOption = (option) => {
 		setOption(option);
 	};
-	const handleUpdateSettings = (newColor, newFont) => {
+	const handleUpdateSettings = (newColor, newFont, newPomodoroOptions) => {
 		setThemeColor(newColor);
 		setThemeFont(newFont);
+		setPomodoroOptions(newPomodoroOptions);
 		setSettingsVisible(false);
 	};
 
@@ -60,16 +61,24 @@ function App() {
 		setSettingsVisible(!settingsVisible);
 	};
 
+	Object.filter = (obj, predicate) =>
+		Object.fromEntries(Object.entries(obj).filter(predicate));
+
+	const filteringOptions = Object.filter(
+		pomodoroOptions,
+		([opt, time]) => opt === option
+	);
+
 	return (
 		<Wrapper>
 			<GlobalStyle font={themeFont} color={themeColor} />
 			<Header />
 			<Buttons
 				pomodoroOption={option}
-				pomodoroOptions={pomodoroOptions}
+				pomodoroOptions={Object.keys(pomodoroOptions)}
 				handleOption={handleOption}
 			/>
-			<Pomodoro timer={pomodoroTime} />
+			<Pomodoro timer={Object.values(filteringOptions)} />
 			<Settings toggleSettings={toggleSettings} />
 			{settingsVisible && (
 				<SettingsModal
@@ -77,6 +86,7 @@ function App() {
 					handleUpdateSettings={handleUpdateSettings}
 					themeFont={themeFont}
 					themeColor={themeColor}
+					pomodoroOptions={pomodoroOptions}
 				/>
 			)}
 		</Wrapper>

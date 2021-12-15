@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReactComponent as Close } from "../../assets/icon-close.svg";
 import CustomButton from "../custom-button/custom-button.component";
 
@@ -15,18 +15,28 @@ const SettingsModal = ({
 	themeFont,
 	themeColor,
 	handleUpdateSettings,
+	pomodoroOptions,
 }) => {
 	const [newColor, setNewColor] = useState(themeColor);
 	const [newFont, setNewFont] = useState(themeFont);
+	const [newPomodoroOptions, setNewPomodoroOptions] =
+		useState(pomodoroOptions);
 
 	const handleChangeColor = (color) => {
 		setNewColor(color);
 	};
+
 	const handleChangeFont = (font) => {
 		setNewFont(font);
 	};
+
+	const handleChangeInput = (e) => {
+		const { name, value } = e.target;
+		setNewPomodoroOptions({ ...newPomodoroOptions, [name]: value });
+	};
+
 	const handleSubmit = () => {
-		handleUpdateSettings(newColor, newFont);
+		handleUpdateSettings(newColor, newFont, newPomodoroOptions);
 	};
 
 	return (
@@ -39,33 +49,21 @@ const SettingsModal = ({
 				<div className="settings-options time">
 					<p>Time (minutes)</p>
 					<div className="time-imputs">
-						<label>
-							pomodoro
-							<input
-								type="number"
-								defaultValue={25}
-								min={0}
-								max={60}
-							></input>
-						</label>
-						<label>
-							short break
-							<input
-								type="number"
-								defaultValue={5}
-								min={0}
-								max={60}
-							></input>
-						</label>
-						<label>
-							long break
-							<input
-								type="number"
-								defaultValue={15}
-								min={0}
-								max={60}
-							></input>
-						</label>
+						{Object.entries(pomodoroOptions).map(
+							([key, value, idx]) => (
+								<div key={key}>
+									<label htmlFor={key}>{key}</label>
+									<input
+										type="number"
+										defaultValue={value}
+										min={0}
+										max={60}
+										name={key}
+										onChange={handleChangeInput}
+									></input>
+								</div>
+							)
+						)}
 					</div>
 				</div>
 				<div className="settings-options font">
